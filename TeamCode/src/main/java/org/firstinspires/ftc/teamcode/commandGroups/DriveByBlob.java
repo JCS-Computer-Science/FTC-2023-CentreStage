@@ -25,9 +25,9 @@ import org.firstinspires.ftc.teamcode.subsystems.VisionSubsystem;
 import java.util.HashMap;
 
 public class DriveByBlob extends SequentialCommandGroup {
-	private final double forwardTravel = -26.5;
-	private final double sideOffset = 1.5;
-	private final double frontOffset = -1.5;
+	private final double forwardTravel = -28.5;
+	private final double sideOffset = 2.0;
+	private final double frontOffset = 0.0;
 	public DriveByBlob(DriveSubsystem d, OdometrySubsystem o, TelemetrySubsystem t, VisionSubsystem v, DepositorSubsystem ds, LiftSubsystem ls, GripperSubsystem gs) {
 		addCommands(
 				new BlobDetect(v),
@@ -38,22 +38,22 @@ public class DriveByBlob extends SequentialCommandGroup {
 				new Wait(1.0),
 				new SelectCommand(
 						new HashMap<Object, Command>() {{
-							put(BlobProcessor.Selected.LEFT, new DriveToPose(d, o, t, new Pose2d(forwardTravel,0, Rotation2d.fromDegrees(90)),3.0));
-							put(BlobProcessor.Selected.MIDDLE, new DriveToPose(d, o, t, new Pose2d(forwardTravel,0, Rotation2d.fromDegrees(0)),3.0));
-							put(BlobProcessor.Selected.RIGHT, new DriveToPose(d, o, t, new Pose2d(forwardTravel,0, Rotation2d.fromDegrees(-90)),3.0));
-						}},
-						// the selector
-						v::getBlob
-				),
-				new SelectCommand(
-						new HashMap<Object, Command>() {{
 							put(BlobProcessor.Selected.LEFT, new DriveToPose(d, o, t, new Pose2d(forwardTravel,-sideOffset, Rotation2d.fromDegrees(90)),3.0));
-							put(BlobProcessor.Selected.MIDDLE, new DriveToPose(d, o, t, new Pose2d(forwardTravel+frontOffset,0, Rotation2d.fromDegrees(0)),3.0));
+							put(BlobProcessor.Selected.MIDDLE, new DriveToPose(d, o, t, new Pose2d(forwardTravel,0, Rotation2d.fromDegrees(0)),3.0));
 							put(BlobProcessor.Selected.RIGHT, new DriveToPose(d, o, t, new Pose2d(forwardTravel,sideOffset, Rotation2d.fromDegrees(-90)),3.0));
 						}},
 						// the selector
 						v::getBlob
 				),
+//				new SelectCommand(
+//						new HashMap<Object, Command>() {{
+//							put(BlobProcessor.Selected.LEFT, new DriveToPose(d, o, t, new Pose2d(forwardTravel,-sideOffset, Rotation2d.fromDegrees(90)),3.0));
+//							put(BlobProcessor.Selected.MIDDLE, new DriveToPose(d, o, t, new Pose2d(forwardTravel+frontOffset,0, Rotation2d.fromDegrees(0)),3.0));
+//							put(BlobProcessor.Selected.RIGHT, new DriveToPose(d, o, t, new Pose2d(forwardTravel,sideOffset, Rotation2d.fromDegrees(-90)),3.0));
+//						}},
+//						// the selector
+//						v::getBlob
+//				),
 				new DepositorOpen(ds),
 				new Wait(1.0),
 				new SelectCommand(
