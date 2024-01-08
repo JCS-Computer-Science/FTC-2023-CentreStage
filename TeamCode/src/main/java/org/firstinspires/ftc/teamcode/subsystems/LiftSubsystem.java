@@ -30,7 +30,7 @@ public class LiftSubsystem extends SubsystemBase {
 	}
 	private final TelemetrySubsystem t;
 	public DcMotorEx liftMotor;
-	private double ticksPerInches = 537.7/(Math.PI * Convert.mmToInches(38.2));
+	private final double ticksPerInches = 537.7/(Math.PI * Convert.mmToInches(38.2));
 	public int ticksFromInches(double inches) {
 		return Double.valueOf(inches * ticksPerInches).intValue();
 	}
@@ -48,7 +48,7 @@ public class LiftSubsystem extends SubsystemBase {
 
 	public void gotoPreset(LIFT_POSITIONS pos) {
 		int positionInTicks = ticksFromInches(pos.inches);
-		setPosition(positionInTicks);
+//		setPosition(positionInTicks);
 	}
 
 	/**
